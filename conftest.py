@@ -31,3 +31,11 @@ def client():
     yield TestClient(app)
     app.dependency_overrides.clear()
     Base.metadata.drop_all(bind=engine)
+
+@pytest.fixture()
+def auth_headers(client):
+    user = {"username": "testuser", "password": "testpass"}
+    client.post("/users/register", json=user)
+    response = client.post("/users/login", data=user)
+    token = response.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
