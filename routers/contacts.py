@@ -3,16 +3,11 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 from database import SessionLocal
+from database import get_db
 import auth
 from rapidfuzz import fuzz
 from itertools import combinations
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 router = APIRouter(prefix="/contacts", tags=["contacts"])
 

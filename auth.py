@@ -6,17 +6,12 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from database import SessionLocal
+from database import get_db
 import models
 from dotenv import load_dotenv
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/login")
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 #ХЕШУВАННЯ ПАРОЛІВ
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
