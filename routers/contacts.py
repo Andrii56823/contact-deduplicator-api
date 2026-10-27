@@ -60,7 +60,7 @@ def find_duplicates(db: Session = Depends(get_db), current_user: models.User = D
             })
     return duplicates
 
-@router.post("/contacts/merge/{keep_id}/{remove_id}")
+@router.post("/merge/{keep_id}/{remove_id}")
 def merge_contacts(keep_id: int, remove_id: int,  db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
     keep_contact = db.query(models.Contact).filter(models.Contact.id == keep_id, models.Contact.owner_id == current_user.id).first()
     remove_contact = db.query(models.Contact).filter(models.Contact.id == remove_id, models.Contact.owner_id == current_user.id).first()
