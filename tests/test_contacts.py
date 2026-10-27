@@ -51,4 +51,20 @@ def test_merge_contacts(client, auth_headers):
     assert response.json()["phone"] == "123456"
 
     contacts = client.get("/contacts/all", headers=auth_headers).json()
-    assert len(contacts) == 1              
+    assert len(contacts) == 1  
+
+def test_merge_contact_with_itself(client, auth_headers):
+    contact = client.post(
+        "/contacts/create",
+        json={"name": "John Smith", "email": "john@example.com"},
+        headers=auth_headers,
+    ).json()
+
+    response = client.post(
+        f"/contacts/merge/{contact['id']}/{contact['id']}",
+        headers=auth_headers,
+    )
+    assert response.status_code == 400
+
+    contacts = client.get("/contacts/all", headers=auth_headers).json()
+    assert len(contacts) == 1            
