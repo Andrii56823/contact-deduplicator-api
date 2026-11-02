@@ -13,6 +13,7 @@ class Contact(Base):
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
     phone = Column(String, nullable=True)
+    notes = Column(String, nullable=True)
     company = Column(String, nullable=True)
     owner_id = Column(Integer, ForeignKey("user.id"))
 
