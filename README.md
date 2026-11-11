@@ -1,5 +1,7 @@
 # Contact Deduplicator API
 
+![Tests](https://github.com/Andrii56823/contact-deduplicator-api/actions/workflows/tests.yml/badge.svg)
+
 A REST API for managing contacts and cleaning up duplicates. Each user keeps a private list of contacts, finds near-duplicate names with fuzzy matching, and merges two duplicates into one record.
 
 ## Features
